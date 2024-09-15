@@ -1,4 +1,5 @@
-[https://github.com/actions/upload-artifact#zipped-artifact-downloads https://github.com/actions/upload-artifact#zipped-artifact-downloads](https://github.com/Sakalt/os-hotal/actions/runs/10872836901/artifacts/1934947990)
+https://github.com/actions/upload-artifact#zipped-artifact-downloads https://github.com/actions/upload-artifact#zipped-artifact-downloads
+https://github.com/Sakalt/os-hotal/actions/runs/10872836901/artifacts/1934947990
 # ToaruOS
 
 ToaruOS is a "complete" operating system for x86-64 PCs and experimental support for ARMv8.
