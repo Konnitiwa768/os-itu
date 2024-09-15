@@ -1,9 +1,9 @@
-name: Create ISO Image from Repository Files
+name: Create ISO Image
 
 on:
   push:
     branches:
-      - master  # またはデフォルトブランチ名
+      - main
   workflow_dispatch:
 
 jobs:
@@ -20,11 +20,15 @@ jobs:
       - name: Create ISO image
         run: |
           mkdir -p output
-          # デフォルトのチェックアウトディレクトリをISOに変換
           mkisofs -o output/repository.iso .
-          
+
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v3
         with:
           name: repository-iso
           path: output/repository.iso
+
+      - name: Display artifact download URL
+        run: |
+          echo "The artifact can be downloaded from:"
+          echo "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
