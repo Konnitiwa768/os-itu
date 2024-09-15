@@ -1,0 +1,22 @@
+name: Create ISO Image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install mkisofs
+        run: sudo apt-get update && sudo apt-get install -y genisoimage
+
+      - name: Create ISO image
+        run: |
+          mkdir -p output
+          mkisofs -o output/repository.iso .
