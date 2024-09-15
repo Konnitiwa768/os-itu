@@ -3,7 +3,7 @@ name: Create ISO Image from Repository Files
 on:
   push:
     branches:
-      - main  # またはデフォルトブランチ名
+      - master  # またはデフォルトブランチ名
   workflow_dispatch:
 
 jobs:
