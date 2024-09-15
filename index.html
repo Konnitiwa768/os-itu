@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v86 Emulator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="v86-canvas"></canvas>
+    <script src="https://unpkg.com/v86@0.1.0/dist/v86.js"></script>
+    <script>
+        const v86 = new V86({
+            memory_size: 512 * 1024 * 1024,  // メモリサイズ（例: 512MB）
+            vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ
+            cdrom: "https://github.com/klange/toaruos/releases/download/v2.2.0/image.iso",  // Toaru OSのISOファイルURL
+            canvas: document.getElementById('v86-canvas'),
+            autostart: true
+        });
+    </script>
+</body>
+</html>
