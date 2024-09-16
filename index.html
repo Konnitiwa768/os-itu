@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v86 Emulator</title>
+    <title>v86 Emulator with Error Handling</title>
     <style>
         body {
             margin: 0;
@@ -11,28 +11,45 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 300vh;
-            width: 300vw;
+            height: 100vh;
             background-color: #f0f0f0;
         }
         canvas {
             border: 1px solid black;
         }
+        #error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;  /* エラーが発生したときだけ表示 */
+        }
     </style>
 </head>
 <body>
     <canvas id="v86-canvas"></canvas>
+    <div id="error">OSの読み込みに失敗しました。コンソールを確認してください。</div>
     <script src="https://unpkg.com/v86@0.1.0/dist/v86.js"></script>
     <script>
-        const v86 = new V86({
-            memory_size: 256 * 1024 * 1024,  // メモリサイズを256MBに変更
-            vga_memory_size: 4 * 1024 * 1024,  // VGAメモリサイズを小さめに
-            cdrom: {
-                url: "https://github.com/Sakalt/os-hotal/actions/runs/10872836901/artifacts/1934947990",  // 正しいISOファイルURL
-            },
-            canvas: document.getElementById('v86-canvas'),
-            autostart: true
-        });
+        try {
+            const v86 = new V86({
+                memory_size: 256 * 1024 * 1024,  // メモリサイズ（例: 256MB）
+                vga_memory_size: 4 * 1024 * 1024,  // VGAメモリサイズ（4MB）
+                cdrom: {
+                    url: "https://github.com/klange/toaruos/releases/download/v2.2.0/image.iso",  // Toaru OSのISOファイルURL
+                },
+                canvas: document.getElementById('v86-canvas'),
+                autostart: true
+            });
+
+            // エラー発生時のハンドリング
+            v86.add_listener("emulator-error", function(e) {
+                console.error("エミュレーションエラー:", e);
+                document.getElementById('error').style.display = 'block';  // エラーメッセージを表示
+            });
+        } catch (error) {
+            console.error("初期化エラー:", error);
+            document.getElementById('error').style.display = 'block';  // エラーメッセージを表示
+        }
     </script>
 </body>
 </html>
