@@ -29,17 +29,21 @@
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <script src="https://cdn.jsdelivr.net/npm/v86@0.1.0/dist/v86.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v86@latest/dist/v86.js"></script>
     <script>
-        // v86.jsが読み込まれているか確認
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
         if (typeof V86 === 'undefined') {
-            document.getElementById('error').textContent = "v86.jsが正しく読み込まれていません。";
-            document.getElementById('error').style.display = 'block';
+            showError("v86.jsが正しく読み込まれていません。");
         } else {
             try {
                 const emulator = new V86({
-                    memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
-                    vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
+                    memory_size: 768 * 1024 * 1024,  // メモリサイズ（768MB）
+                    vga_memory_size: 12 * 1024 * 1024,  // VGAメモリサイズ（12MB）
                     cdrom: {
                         url: "https://github.com/sakalt/os-hotal/raw/master/repository.iso",  // ISOファイルのURL
                     },
@@ -59,12 +63,6 @@
             } catch (error) {
                 showError("初期化エラーが発生しました: " + error.message);
             }
-        }
-
-        function showError(message) {
-            const errorDiv = document.getElementById('error');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
         }
     </script>
 </body>
