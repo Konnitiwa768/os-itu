@@ -29,7 +29,8 @@
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <script src="https://cdn.jsdelivr.net/npm/v86@latest/dist/v86.js"></script>
+    <!-- 修正されたv86.jsのCDN URLを使用 -->
+    <script src="https://cdn.jsdelivr.net/npm/v86@0.4.0/build/index.min.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.getElementById('error');
@@ -42,8 +43,8 @@
         } else {
             try {
                 const emulator = new V86({
-                    memory_size: 768 * 1024 * 1024,  // メモリサイズ（768MB）
-                    vga_memory_size: 12 * 1024 * 1024,  // VGAメモリサイズ（12MB）
+                    memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
+                    vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
                     cdrom: {
                         url: "https://github.com/sakalt/os-hotal/raw/master/repository.iso",  // ISOファイルのURL
                     },
