@@ -29,8 +29,8 @@
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <!-- 最新版のv86.jsのCDN URLを使用 -->
-    <script src="https://cdn.jsdelivr.net/npm/v86@0.5.0/build/index.min.js"></script>
+    <!-- 修正されたv86.jsのCDN URLを使用 -->
+    <script src="https://cdn.jsdelivr.net/npm/v86@0.4.0/build/index.min.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.getElementById('error');
@@ -38,9 +38,7 @@
             errorDiv.style.display = 'block';
         }
 
-        if (typeof V86 === 'undefined') {
-            showError("v86.jsが正しく読み込まれていません。");
-        } else {
+        function initializeEmulator() {
             try {
                 const emulator = new V86({
                     memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
@@ -64,6 +62,13 @@
             } catch (error) {
                 showError("初期化エラーが発生しました: " + error.message);
             }
+        }
+
+        // v86.jsが正しく読み込まれたかを確認
+        if (typeof V86 !== 'undefined') {
+            initializeEmulator();
+        } else {
+            showError("v86.jsが正しく読み込まれていません。");
         }
     </script>
 </body>
