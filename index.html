@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v86 Emulator</title>
+    <title>Copy.sh Emulator</title>
     <style>
         body {
             margin: 0;
@@ -24,20 +24,13 @@
             margin-top: 10px;
             display: none; /* エラーが発生するまで非表示 */
         }
-        #console-errors {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
-            white-space: pre-wrap; /* エラー内容を折り返さずに表示 */
-        }
     </style>
 </head>
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <div id="console-errors"></div> <!-- コンソールエラー表示用の要素 -->
-    <!-- 修正されたv86.jsのCDN URLを使用 -->
-    <script src="https://cdn.jsdelivr.net/npm/v86@0.4.0/build/index.js"></script>
+    <!-- Copy.shのv86.jsライブラリ -->
+    <script src="https://copy.sh/v86/build/v86.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.getElementById('error');
@@ -45,24 +38,10 @@
             errorDiv.style.display = 'block';
         }
 
-        function showConsoleErrors(message) {
-            const consoleErrorsDiv = document.getElementById('console-errors');
-            consoleErrorsDiv.textContent = message;
-            consoleErrorsDiv.style.display = 'block';
-        }
-
-        // コンソールエラーをキャッチして表示する
-        window.addEventListener('error', function(e) {
-            showConsoleErrors(`Console error: ${e.message}\nURL: ${e.filename}:${e.lineno}:${e.colno}`);
-        });
-
-        function initializeEmulator() {
+        if (typeof V86 === 'undefined') {
+            showError("v86.jsが正しく読み込まれていません。");
+        } else {
             try {
-                if (typeof V86 === 'undefined') {
-                    showError("v86.jsが正しく読み込まれていません。");
-                    return;
-                }
-
                 const emulator = new V86({
                     memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
                     vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
@@ -85,13 +64,6 @@
             } catch (error) {
                 showError("初期化エラーが発生しました: " + error.message);
             }
-        }
-
-        // v86.jsが正しく読み込まれたかを確認
-        if (typeof V86 !== 'undefined') {
-            initializeEmulator();
-        } else {
-            showError("v86.jsが正しく読み込まれていません。");
         }
     </script>
 </body>
