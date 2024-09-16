@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v86 Emulator with Updated ISO and Memory</title>
+    <title>v86 Emulator</title>
     <style>
         body {
             margin: 0;
@@ -21,7 +21,7 @@
             color: red;
             font-size: 14px;
             margin-top: 10px;
-            display: none;  /* エラーが発生したときだけ表示 */
+            display: none;
         }
     </style>
 </head>
@@ -32,10 +32,10 @@
     <script>
         try {
             const v86 = new V86({
-                memory_size: 512 * 1024 * 1024,  // メモリサイズを1.5倍に（768MB）
-                vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズを1.5倍に（12MB）
+                memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
+                vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
                 cdrom: {
-                    url: "https://github.com/sakalt/os-hotal/repository.iso",  // 生成されたISOファイルのURLに変更
+                    url: "https://github.com/sakalt/os-hotal/raw/master/repository.iso",  // ISOファイルのURL
                 },
                 canvas: document.getElementById('v86-canvas'),
                 autostart: true
