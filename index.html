@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,8 @@
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <script src="https://unpkg.com/v86@0.1.0/dist/v86.js"></script>
+    <!-- 正しいv86.js CDN URLを使用 -->
+    <script src="https://copy.sh/v86/build/v86.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.getElementById('error');
@@ -38,7 +39,7 @@
         }
 
         try {
-            const v86 = new V86({
+            const emulator = new V86({
                 memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
                 vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
                 cdrom: {
@@ -49,12 +50,12 @@
             });
 
             // エラー発生時のハンドリング
-            v86.add_listener("emulator-error", function(e) {
+            emulator.add_listener("emulator-error", function(e) {
                 showError("エミュレーションエラーが発生しました: " + e.message);
             });
 
             // ISOファイルのロードに失敗した場合のハンドリング
-            v86.add_listener("download-error", function(e) {
+            emulator.add_listener("download-error", function(e) {
                 showError("ISOファイルの読み込みに失敗しました。URLが正しいか確認してください。");
             });
         } catch (error) {
