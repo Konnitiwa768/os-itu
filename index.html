@@ -29,37 +29,42 @@
 <body>
     <canvas id="v86-canvas"></canvas>
     <div id="error"></div>
-    <!-- 正しいv86.js CDN URLを使用 -->
-    <script src="https://copy.sh/v86/build/v86.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v86@0.1.0/dist/v86.js"></script>
     <script>
+        // v86.jsが読み込まれているか確認
+        if (typeof V86 === 'undefined') {
+            document.getElementById('error').textContent = "v86.jsが正しく読み込まれていません。";
+            document.getElementById('error').style.display = 'block';
+        } else {
+            try {
+                const emulator = new V86({
+                    memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
+                    vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
+                    cdrom: {
+                        url: "https://github.com/sakalt/os-hotal/raw/master/repository.iso",  // ISOファイルのURL
+                    },
+                    canvas: document.getElementById('v86-canvas'),
+                    autostart: true
+                });
+
+                // エラー発生時のハンドリング
+                emulator.add_listener("emulator-error", function(e) {
+                    showError("エミュレーションエラーが発生しました: " + e.message);
+                });
+
+                // ISOファイルのロードに失敗した場合のハンドリング
+                emulator.add_listener("download-error", function(e) {
+                    showError("ISOファイルの読み込みに失敗しました。URLが正しいか確認してください。");
+                });
+            } catch (error) {
+                showError("初期化エラーが発生しました: " + error.message);
+            }
+        }
+
         function showError(message) {
             const errorDiv = document.getElementById('error');
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
-        }
-
-        try {
-            const emulator = new V86({
-                memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
-                vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズ（8MB）
-                cdrom: {
-                    url: "https://github.com/sakalt/os-hotal/raw/master/repository.iso",  // ISOファイルのURL
-                },
-                canvas: document.getElementById('v86-canvas'),
-                autostart: true
-            });
-
-            // エラー発生時のハンドリング
-            emulator.add_listener("emulator-error", function(e) {
-                showError("エミュレーションエラーが発生しました: " + e.message);
-            });
-
-            // ISOファイルのロードに失敗した場合のハンドリング
-            emulator.add_listener("download-error", function(e) {
-                showError("ISOファイルの読み込みに失敗しました。URLが正しいか確認してください。");
-            });
-        } catch (error) {
-            showError("初期化エラーが発生しました: " + error.message);
         }
     </script>
 </body>
