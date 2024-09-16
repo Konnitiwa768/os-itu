@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             background-color: #f0f0f0;
         }
@@ -19,17 +20,23 @@
         }
         #error {
             color: red;
-            font-size: 14px;
+            font-size: 16px;
             margin-top: 10px;
-            display: none;
+            display: none; /* エラーが発生するまで非表示 */
         }
     </style>
 </head>
 <body>
     <canvas id="v86-canvas"></canvas>
-    <div id="error">OSの読み込みに失敗しました。コンソールを確認してください。</div>
+    <div id="error"></div>
     <script src="https://unpkg.com/v86@0.1.0/dist/v86.js"></script>
     <script>
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
         try {
             const v86 = new V86({
                 memory_size: 512 * 1024 * 1024,  // メモリサイズ（512MB）
@@ -43,12 +50,15 @@
 
             // エラー発生時のハンドリング
             v86.add_listener("emulator-error", function(e) {
-                console.error("エミュレーションエラー:", e);
-                document.getElementById('error').style.display = 'block';  // エラーメッセージを表示
+                showError("エミュレーションエラーが発生しました: " + e.message);
+            });
+
+            // ISOファイルのロードに失敗した場合のハンドリング
+            v86.add_listener("download-error", function(e) {
+                showError("ISOファイルの読み込みに失敗しました。URLが正しいか確認してください。");
             });
         } catch (error) {
-            console.error("初期化エラー:", error);
-            document.getElementById('error').style.display = 'block';  // エラーメッセージを表示
+            showError("初期化エラーが発生しました: " + error.message);
         }
     </script>
 </body>
