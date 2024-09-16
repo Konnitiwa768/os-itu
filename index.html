@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v86 Emulator with Error Handling</title>
+    <title>v86 Emulator with Updated ISO and Memory</title>
     <style>
         body {
             margin: 0;
@@ -32,10 +32,10 @@
     <script>
         try {
             const v86 = new V86({
-                memory_size: 256 * 1024 * 1024,  // メモリサイズ（例: 256MB）
-                vga_memory_size: 4 * 1024 * 1024,  // VGAメモリサイズ（4MB）
+                memory_size: 512 * 1024 * 1024,  // メモリサイズを1.5倍に（768MB）
+                vga_memory_size: 8 * 1024 * 1024,  // VGAメモリサイズを1.5倍に（12MB）
                 cdrom: {
-                    url: "https://github.com/klange/toaruos/releases/tag/download/v2.2.0/image.iso",  // Toaru OSのISOファイルURL
+                    url: "https://github.com/sakalt/os-hotal/repository.iso",  // 生成されたISOファイルのURLに変更
                 },
                 canvas: document.getElementById('v86-canvas'),
                 autostart: true
