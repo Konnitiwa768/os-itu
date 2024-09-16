@@ -53,7 +53,7 @@
 
         // コンソールエラーをキャッチして表示する
         window.addEventListener('error', function(e) {
-            showConsoleErrors(`Console error: ${e.message}`);
+            showConsoleErrors(`Console error: ${e.message}\nURL: ${e.filename}:${e.lineno}:${e.colno}`);
         });
 
         function initializeEmulator() {
