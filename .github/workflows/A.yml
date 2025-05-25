@@ -3,7 +3,7 @@ name: Create ISO of Repository and Upload to Release
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'v*'  # タグ付きのpushで実行（例: v1.0.0）
 
