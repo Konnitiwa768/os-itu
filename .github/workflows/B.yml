@@ -1,0 +1,44 @@
+name: Create ISO and Upload to Release
+
+on:
+  push:
+    branches:
+      - main  # または master
+
+jobs:
+  create-iso:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # タグ操作のため全履歴取得
+
+    - name: Set up tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y genisoimage
+
+    - name: Create ISO file
+      run: |
+        mkdir -p iso_output
+        genisoimage -o iso_output/repository.iso -R .
+        echo "ISO file size:"
+        du -h iso_output/repository.iso
+
+    - name: Generate tag from current date
+      id: tagger
+      run: |
+        TAG_NAME="auto-$(date +'%Y%m%d-%H%M%S')"
+        git tag "$TAG_NAME"
+        git push origin "$TAG_NAME"
+        echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+    - name: Upload ISO to GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: iso_output/repository.iso
+        tag_name: ${{ steps.tagger.outputs.tag_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
