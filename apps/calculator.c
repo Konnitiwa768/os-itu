@@ -135,10 +135,10 @@ static void btn_func_equ(struct CalculatorButton * self) {
 #define BTN_COLS 5
 
 struct CalculatorButton buttons[] = {
-	N(7), N(8), N(9),         F("÷",div), F("(",opr),
-	N(4), N(5), N(6),         F("×",mul), F(")",cpr),
-	N(1), N(2), N(3),         F("-",sub), F("C",clr),
-	N(0), N(.), F("mod",pct), F("+",add), F("=",equ),
+	N(7), N(8), N(9),         F("÷",商), F("(",opr),
+	N(4), N(5), N(6),         F("×",積), F(")",cpr),
+	N(1), N(2), N(3),         F("-",差), F("C",消),
+	N(0), N(.), F("mod",pct), F("+",和), F("=",計),
 };
 
 static void redraw(void) {
