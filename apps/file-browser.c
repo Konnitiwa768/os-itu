@@ -106,11 +106,11 @@ static int _button_hover = -1;
 /* Menu bar entries */
 static struct menu_bar menu_bar = {0};
 static struct menu_bar_entries menu_entries[] = {
-	{"File", "file"}, /* 0 */
-	{"Edit", "edit"}, /* 1 */
-	{"View", "view"}, /* 2 */
-	{"Go", "go"},     /* 3 */
-	{"Help", "help"}, /* 4 */
+	{"ファイル", "ファイル"}, /* 0 */
+	{"編集","編集"}, /* 1 */
+	{"見る", "見る"}, /* 2 */
+	{"行く", "行く"},     /* 3 */
+	{"ヘルプ", "ヘルプ"}, /* 4 */
 	{NULL, NULL},
 };
 
