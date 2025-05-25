@@ -164,7 +164,7 @@ int main(int argc, char * argv[]) {
 
 	yctx = yutani_init();
 	if (!yctx) {
-		fprintf(stderr, "%s: failed to connect to compositor\n", argv[0]);
+		fprintf(stderr, "%s: コンポジターへの接続失敗\n", argv[0]);
 		return 1;
 	}
 	init_decorations();
@@ -181,7 +181,7 @@ int main(int argc, char * argv[]) {
 
 	int status = load_sprite(&img, argv[optind]);
 	if (status) {
-		fprintf(stderr, "%s: failed to open image %s\n", argv[0], argv[optind]);
+		fprintf(stderr, "%s: 画像を開けませんでした。 %s\n", argv[0], argv[optind]);
 		return 1;
 	}
 
