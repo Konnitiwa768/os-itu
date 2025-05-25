@@ -1,0 +1,37 @@
+name: Create ISO of Repository and Upload to Release
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*'  # タグ付きのpushで実行（例: v1.0.0）
+
+jobs:
+  create-iso:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # 全履歴を取得（必要なら）
+
+    - name: Set up genisoimage
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y genisoimage
+
+    - name: Create ISO file of repository
+      run: |
+        mkdir -p iso_output
+        genisoimage -o iso_output/repository.iso -R .
+        echo "ISO file size:"
+        du -h iso_output/repository.iso
+
+    - name: Upload ISO to GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: iso_output/repository.iso
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
