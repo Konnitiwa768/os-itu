@@ -7,7 +7,7 @@ https://copy.sh/v86/build/v86.js
 # ToaruOS
 https://github.com/sakalt/os-hotal/raw/master/repository.iso
 ToaruOS is a "complete" operating system for x86-64 PCs and experimental support for ARMv8.
-
+https://chatgpt.com
 While many independent, hobby, and research OSes aim to experiment with new designs, ToaruOS is intended as an educational resource, providing a representative microcosm of functionality found in major desktop operating systems.
 
 The OS includes a kernel, bootloader, dynamic shared object linker, C standard library, its own composited windowing system, a dynamic bytecode-compiled programming language, advanced code editor, and dozens of other utilities and example applications.
