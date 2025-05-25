@@ -3,7 +3,7 @@ name: Create ISO and Upload to Release
 on:
   push:
     branches:
-      - master  # または master
+      - Os2-sidney # または master
 
 jobs:
   create-iso:
