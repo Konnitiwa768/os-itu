@@ -54,7 +54,7 @@ int main(int argc, char ** argv) {
 	}
 
 	if (optind == argc) {
-		fprintf(stderr, "%s: 予想されるフラグメント\n", argv[0]);
+		fprintf(stderr, "%s: 予想される引数\n", argv[0]);
 		return 1;
 	}
 
