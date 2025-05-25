@@ -45,7 +45,7 @@ int main(int argc, char ** argv) {
 	while ((opt = getopt(argc, argv, "m:p")) != -1) {
 		switch (opt) {
 			case 'm':
-				fprintf(stderr, "%s: -m unsupported\n", argv[0]);
+				fprintf(stderr, "%s: -m サポートされていない\n", argv[0]);
 				return 1;
 			case 'p':
 				parents = 1;
@@ -54,7 +54,7 @@ int main(int argc, char ** argv) {
 	}
 
 	if (optind == argc) {
-		fprintf(stderr, "%s: expected argument\n", argv[0]);
+		fprintf(stderr, "%s: 予想されるフラグメント\n", argv[0]);
 		return 1;
 	}
 
