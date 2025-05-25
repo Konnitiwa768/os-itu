@@ -1,5 +1,5 @@
-<h1>Calculator</h1>
+<h1>電卓</h1>
 
-A simple calculator powered by Kuroko.<br />
-Use the keyboard or the provided buttons to enter calculations as Kuroko expressions.<br />
-Single-line statements such as imports are also supported. For more math functionality, <mono>import math</mono>.
+Kuroko を搭載したシンプルな電卓です。<br />
+キーボードまたはボタンを使って、Kuroko 式として計算式を入力します。<br />
+import などの単一行ステートメントもサポートされています。より詳細な数式機能については、<mono>import math</mono> を参照してください。
